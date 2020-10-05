@@ -12,58 +12,89 @@ import javax.persistence.Table;
 import com.yamget.SMS_V3.Utils.TodayDate_YYYYMMDD;
 
 @Entity
-@Table(name="exam_grade")
-public class ExamGrade {
+@Table
+public class Class_Subject_ExamGrading_Rel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long cseg_id;
+	@Column(nullable = false, unique = false)
+	private long cl_id;
+	@Column(nullable = false, unique = false)
+	private long sub_id;
+	@Column(nullable = false, unique = false)
 	private long eg_id;
 	@Column(nullable = false, unique = false)
-	private String eg_value;
+	private double grade_from;
 	@Column(nullable = false, unique = false)
-	private String eg_desc;
+	private double grade_to;
 	@Column(nullable = false, unique = false)
-	private String eg_status;
+	private String escg_status;
 	private long created_by;
 	private String create_date;
 	private long update_by;
 	private String update_date;
 	
-	public ExamGrade() {
+	public Class_Subject_ExamGrading_Rel() {
 		super();
 	}
 	
-	public ExamGrade(long eg_id, String eg_value, double eg_from, double eg_to, String eg_desc, String eg_status) {
+	public Class_Subject_ExamGrading_Rel(long cseg_id, long cl_id, long sub_id, long eg_id, double grade_from,
+			double grade_to, String escg_status, long created_by, String create_date, long update_by, String update_date) {
 		super();
+		this.cseg_id = cseg_id;
+		this.cl_id = cl_id;
+		this.sub_id = sub_id;
 		this.eg_id = eg_id;
-		this.eg_value = eg_value;
-		this.eg_desc = eg_desc;
-		this.eg_status = eg_status;
+		this.grade_from = grade_from;
+		this.grade_to = grade_to;
+		this.escg_status = escg_status;
+		this.created_by = created_by;
+		this.create_date = create_date;
+		this.update_by = update_by;
+		this.update_date = update_date;
 	}
-	
+	public long getCseg_id() {
+		return cseg_id;
+	}
+	public void setCseg_id(long cseg_id) {
+		this.cseg_id = cseg_id;
+	}
+	public long getCl_id() {
+		return cl_id;
+	}
+	public void setCl_id(long cl_id) {
+		this.cl_id = cl_id;
+	}
+	public long getSub_id() {
+		return sub_id;
+	}
+	public void setSub_id(long sub_id) {
+		this.sub_id = sub_id;
+	}
 	public long getEg_id() {
 		return eg_id;
 	}
 	public void setEg_id(long eg_id) {
 		this.eg_id = eg_id;
 	}
-	public String getEg_value() {
-		return eg_value;
+	public double getGrade_from() {
+		return grade_from;
 	}
-	public void setEg_value(String eg_value) {
-		this.eg_value = eg_value;
+	public void setGrade_from(double grade_from) {
+		this.grade_from = grade_from;
 	}
-	public String getEg_desc() {
-		return eg_desc;
+	public double getGrade_to() {
+		return grade_to;
 	}
-	public void setEg_desc(String eg_desc) {
-		this.eg_desc = eg_desc;
+	public void setGrade_to(double grade_to) {
+		this.grade_to = grade_to;
 	}
-	public String getEg_status() {
-		return eg_status;
+	public String getEscg_status() {
+		return escg_status;
 	}
-	public void setEg_status(String eg_status) {
-		this.eg_status = eg_status;
+	public void setEscg_status(String escg_status) {
+		this.escg_status = escg_status;
 	}
 	public long getCreated_by() {
 		return created_by;
