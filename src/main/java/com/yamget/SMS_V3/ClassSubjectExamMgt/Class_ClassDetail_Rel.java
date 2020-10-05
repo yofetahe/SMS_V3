@@ -12,49 +12,75 @@ import javax.persistence.Table;
 import com.yamget.SMS_V3.Utils.TodayDate_YYYYMMDD;
 
 @Entity
-@Table(name="class_detail")
-public class ClassDetail {
+@Table
+public class Class_ClassDetail_Rel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long clcd_id;
+	
+	@Column(nullable = false)
+	private long cl_id;
+	
+	@Column(nullable = false)
 	private long cd_id;
-	@Column(nullable = false, unique = false)
-	private String cd_name;
-	@Column(nullable = false, unique = false)
-	private String cd_status;
+		
+	@Column(nullable = false)
+	private int class_capacity;
+	
+	@Column(nullable = false)
+	private String rel_status;
 	private long created_by;
 	private String create_date;
 	private long update_by;
 	private String update_date;
 	
-	public ClassDetail() {
+	public Class_ClassDetail_Rel() {
 		super();
 	}
 	
-	public ClassDetail(long cd_id, String cd_name, String cd_status) {
+	public Class_ClassDetail_Rel(long clcd_id, long cl_id, long cd_id, int class_capacity, String rel_status,
+			long created_by, String create_date, long update_by, String update_date) {
 		super();
+		this.clcd_id = clcd_id;
+		this.cl_id = cl_id;
 		this.cd_id = cd_id;
-		this.cd_name = cd_name;
-		this.cd_status = cd_status;
+		this.class_capacity = class_capacity;
+		this.rel_status = rel_status;
+		this.created_by = created_by;
+		this.create_date = create_date;
+		this.update_by = update_by;
+		this.update_date = update_date;
 	}
-	
+	public long getClcd_id() {
+		return clcd_id;
+	}
+	public void setClcd_id(long clcd_id) {
+		this.clcd_id = clcd_id;
+	}
+	public long getCl_id() {
+		return cl_id;
+	}
+	public void setCl_id(long cl_id) {
+		this.cl_id = cl_id;
+	}
 	public long getCd_id() {
 		return cd_id;
 	}
 	public void setCd_id(long cd_id) {
 		this.cd_id = cd_id;
 	}
-	public String getCd_name() {
-		return cd_name;
+	public int getClass_capacity() {
+		return class_capacity;
 	}
-	public void setCd_name(String cd_name) {
-		this.cd_name = cd_name;
+	public void setClass_capacity(int class_capacity) {
+		this.class_capacity = class_capacity;
 	}
-	public String getCd_status() {
-		return cd_status;
+	public String getRel_status() {
+		return rel_status;
 	}
-	public void setCd_status(String cd_status) {
-		this.cd_status = cd_status;
+	public void setRel_status(String rel_status) {
+		this.rel_status = rel_status;
 	}
 	public long getCreated_by() {
 		return created_by;
@@ -88,5 +114,5 @@ public class ClassDetail {
 	@PreUpdate
 	void updatedAt() {		
 		this.update_date = TodayDate_YYYYMMDD.getDateForModels();
-	}		
+	}
 }

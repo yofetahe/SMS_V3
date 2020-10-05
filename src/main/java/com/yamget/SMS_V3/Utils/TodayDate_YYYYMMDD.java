@@ -161,4 +161,10 @@ public class TodayDate_YYYYMMDD {
 		String yr = DateConvertor.dateConvertor(curDate);
 		return yr;
 	}
+	
+	public static String getDateForModels() {
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");		
+		return dateFormat.format(date);
+	}
 }

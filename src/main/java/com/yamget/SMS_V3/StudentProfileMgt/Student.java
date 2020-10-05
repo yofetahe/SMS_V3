@@ -1,11 +1,16 @@
 package com.yamget.SMS_V3.StudentProfileMgt;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -16,25 +21,53 @@ import com.yamget.SMS_V3.RegistrationMgt.Registration;
 public class Student {
 	
 	@Id
-	@GeneratedValue
-	private long si_id;
-	private String public_id;	
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long si_id;	
+	
+	@Column(nullable = false)
+	private String public_id;
+	
+	@Column(nullable = false)
 	private String fname;
+	
+	@Column(nullable = false)
 	private String mname;
+	
+	@Column(nullable = false)
 	private String gname;
+	
+	@Column(nullable = false)
 	private String mother_name;
+	
+	@Column(nullable = false)
 	private String sex;
+	
+	@Column(nullable = false)
 	private String dob;
+	
+	@Column(nullable = false)
 	private String pob;
+	
+	@Column(nullable = false)
 	private String nationality;
+	
+	@Column(nullable = false)
 	private String id_no;
+	
+	@Column(nullable = false)
 	private String photo_name;
+	
+	@Column(nullable = false)
 	private String photo_path;
+	
+	//On-Process, Registered
+	@Column(nullable = false)
 	private String si_status;
+	
 	private int create_by;
-	private Date create_date;
+	private String create_date;
 	private int update_by;
-	private Date update_date;
+	private String update_date;
 	
 	@Transient
 	private Registration registration;
@@ -158,22 +191,20 @@ public class Student {
 	public void setCreate_by(int create_by) {
 		this.create_by = create_by;
 	}
-	public Date getCreate_date() {
+	public String getCreate_date() {
 		return create_date;
 	}
-	public void setCreate_date(Date create_date) {
-		this.create_date = create_date;
-	}
+	
 	public int getUpdate_by() {
 		return update_by;
 	}
 	public void setUpdate_by(int update_by) {
 		this.update_by = update_by;
 	}
-	public Date getUpdate_date() {
+	public String getUpdate_date() {
 		return update_date;
 	}
-	public void setUpdate_date(Date update_date) {
+	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
 	}
 	public Registration getRegistration() {
@@ -194,12 +225,17 @@ public class Student {
 	public void setStudentEmergencyContact(Student_EmergencyContact studentEmergencyContact) {
 		this.studentEmergencyContact = studentEmergencyContact;
 	}
-
 	public List<Long> getIdsList() {
 		return idsList;
 	}
-
 	public void setIdsList(List<Long> idsList) {
 		this.idsList = idsList;
+	}
+	@PrePersist
+	void createdAt() {
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+		String strDate = dateFormat.format(date); 
+	    this.create_date = strDate;
 	}
 }
